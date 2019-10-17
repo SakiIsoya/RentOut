@@ -36,14 +36,14 @@
                             <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
                             <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
                             <li class="nav-item"><a class="nav-link" href="accomodation.html">Rental Gear</a></li>
-                            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                            <li class="nav-item submenu dropdown">
+                            <!-- <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li> -->
+                            <!-- <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                                     <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
                                 </ul>
-                            </li> 
+                            </li>  -->
                             <li class="nav-item"><a class="nav-link" href="elements.html">Elemests</a></li>
                             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                         </ul>
@@ -60,8 +60,12 @@
 				<div class="container">
 					<div class="banner_content text-center">
 						<h6>Away from monotonous life</h6>
-						<h2>Relax Your Mind</h2>
-						<p>If you are looking at blank cassettes on the web, you may be very confused at the<br> difference in price. You may see some for as low as $.17 each.</p>
+						<h2>Find Your Adventure</h2>
+						<p>RENT CAMPING GEAR FOR ANY ADVENTURE.<br>
+                           If you searching for super clean camping tent rentals,
+                           camping gear compleate kits,backpacking backpacks,<br>
+                           or any other camping equipment rentals,we have
+                           what you need at RentOut.</p>
 						<a href="#" class="btn theme_btn button_hover">Get Started</a>
 					</div>
 				</div>
