@@ -6,7 +6,7 @@ class User extends Config{
 {
     $hash_password = md5($password);
     $sql = "INSERT INTO users(user_fname,user_lname,user_email,user_address,user_card_no,user_password)
-            VALUE('$fname','$lname','$email','$address','$card','$password')";
+            VALUE('$fname','$lname','$email','$address','$card','$hash_password')";
     $result = $this->conn->query($sql);
     
     if($result === TRUE){
@@ -36,7 +36,7 @@ public function login($email,$password)
         header("Location: admin/index.php");
         }
         elseif($row['user_role'] === 'user'){
-            header("Location:pages/index.php");
+            header("Location: categories.php");
         }
     }
 }

@@ -2,18 +2,20 @@
 require_once("Config.php");
 class Category extends Config{
 
-    public function save($category_name)
+    public function save($category_name,$directory,$filename,$tmp_name)
 {
-$sql = "INSERT INTO categories(category_name)
-        VALUES('$category_name')";
+$sql = "INSERT INTO categories(category_name,category_picture)
+        VALUES('$category_name','$filename')";
         $result = $this->conn->query($sql);
 
         if($result === TRUE)
         {
+            if(move_uploaded_file($tmp_name,"../$directory" . basename($filename))){
             $_SESSION['message'] = "category added successfully";
 
             header("Location: categories.php");
         }
+    }
         else{
             echo $this->conn->error;
         }

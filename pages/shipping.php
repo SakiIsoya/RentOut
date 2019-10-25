@@ -1,16 +1,34 @@
 <?php
+
+require_once("../classes/Shipping.php");
 session_start();
 require_once("../classes/Item.php");
 require_once("../classes/Rental.php");
 
 $item = new Item;
 $rental = new Rental;
+$shipping = new Shipping;
 
+if(isset($_POST['shipping']))
+{
+    $shipping_id = $_POST['shipping_id'];
+    $fname = $_POST['first_name'];
+    $lname = $_POST['last_name'];
+    $phone = $_POST['phone_number'];
+    $email = $_POST['email'];
+    $country = $_POST['country'];
+    $address = $_POST['address'];
+    $postcode = $_POST['postcode'];
+    $user_id = $_POST['user_id'];
+
+    $shipping->save($shipping_id,$fname,$lname,$phone,$email,$country,$address,$city,$postcode,$user_id);
+
+}
 $user_id = $_SESSION['user_id'];
 
 $get_rental_items = $rental->getRentalItems($user_id);
-// $delete_rental_items->deleteRentalItems($rental_id);
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -65,7 +83,7 @@ $get_rental_items = $rental->getRentalItems($user_id);
         </div>
         <div class="container">
             <div class="page-cover text-center">
-                <h2 class="page-cover-tittle">Rental</h2>
+                <h2 class="page-cover-tittle">Checkout</h2>
 
             </div>
         </div>
@@ -74,21 +92,50 @@ $get_rental_items = $rental->getRentalItems($user_id);
 
     <!--================ About History Area  =================-->
     <section class="about_history_area section_gap">
-        
-    <div class="container">
-                <div class="cart_inner">
-                    <div class="table-responsive?php item_id=<?php echo $item_id; ?>">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Price</th>
-                                    <th>Rental Date</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+        <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+                        <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="first" name="name"placeholder="First name">
+                               
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="last" name="name"placeholder="Last name">
+                                
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="number" name="number"placeholder="Phone number">
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="email" name="compemailany"placeholder="Email Address">
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <select class="country_select">
+                                    <option value="1">Japan</option>
+                                    <option value="2">Korea</option>
+                                    <option value="4">Canada</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="add1" name="add1"placeholder="Address line ">
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="city" name="city"placeholder="City">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                            <li><a href="#">Product <span>Total</span></a></li>
+                            <?php
                                 $total_price = 0;
                                 foreach($get_rental_items as $key => $row){
                                     $item_id=$row['item_id'];
@@ -103,103 +150,50 @@ $get_rental_items = $rental->getRentalItems($user_id);
                                     $total = $row['rental_item_price'];
                                     $total_price += $total;
                             ?>
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="img/cart.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p><?php echo $item_name; ?></p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$<?php echo number_format($item_price);?></h5>
-                                    </td>
-                                    <td>
-                                        <h5><?php echo "$start_date - $end_date"; ?></h5>
-                                    </td>
-                                    <td>
-                                        <h5>$<?php echo number_format($total);?></h5>
-                                    </td>
-                                </tr>
+                                <li><a href="#"><?php echo $row['item_name']; ?> <span class="last">$<?php echo number_format($total, 2); ?></span></a></li>
                                 <?php } ?>
-                                <tr>
-                                    <td>
-
-                                    </td>
-
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <h5>Subtotal</h5>
-                                    </td>
-
-                                    <td>
-                                        <h5>$<?php echo number_format($total_price);?></h5>
-                                    </td>
-                                </tr>
-                                <tr class="shipping_area">
-                                    <td>
-                                    </td>
-
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <h5>Shipping Fee</h5>
-                                    </td>
-
-                                    <td>
-                                        <h5>$10.00</h5>
-                                    </td>
-                                </tr>
-                                <tr class="shipping_area">
-                                    <td>
-                                        <!-- <a href="#" class="genric-btn primary">Update Cart</a> -->
-                                    </td>
-
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <h5>Total</h5>
-
-                                    </td>
-
-                                    <td>
-                                        <h5>$<?php echo number_format($total_price + 10,2);?></h5>
-
-                                    </td>
-                                </tr>
-                                <tr class="out_button_area">
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-
-                                    <td>
-                                        <div class="checkout_btn_inner d-flex align-items-center">
-                                            <a class="gray_btn btn btn-primary" href="categories.php">Continue Shopping</a>
-                                            <a class="btn btn-success" href="shipping.php?rental_id=<?php echo $row['rental_id']; ?>">Proceed to checkout</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a href="#">Subtotal <span>$<?php echo number_format($total_price, 2);?></span></a></li>
+                                <li><a href="#">Shipping <span>Flat rate: $10.00</span></a></li>
+                                <li><a href="#">Total <span>$<?php echo number_format($total_price + 10,2);?></span></a></li>
+                            </ul>
+                            <div class="payment_item">
+                                <div class="radion_btn">
+                                    <input type="radio" id="f-option5" name="selector">
+                                    <label for="f-option5">Check payments</label>
+                                    <div class="check"></div>
+                                </div>
+                                <p>Please send a check to Store Name, Store Street, Store Town, Store State / County,
+                                    Store Postcode.</p>
+                            </div>
+                            <div class="payment_item active">
+                                <div class="radion_btn">
+                                    <input type="radio" id="f-option6" name="selector">
+                                    <label for="f-option6">Paypal </label>
+                                    <img src="img/product/card.jpg" alt="">
+                                    <div class="check"></div>
+                                </div>
+                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
+                                    account.</p>
+                            </div>
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option4" name="selector">
+                                <label for="f-option4">I’ve read and accept the </label>
+                                <a href="#">terms & conditions*</a>
+                            </div>
+                            <a href="#" class="btn btn-success">Confirm Payment</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
     </section>
-    <!--================ About History Area  =================-->
+    <!--================End Checkout Area =================-->
+
     
+
     <!--================ start footer Area  =================-->
     <footer class="footer-area section_gap">
         <div class="container">

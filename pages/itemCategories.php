@@ -30,11 +30,11 @@ $get_category = $category->getSingleCategory($category_id);
     </head>
     <body>
         <!--================Header Area =================-->
-        <header class="header_area">
+        <!-- <header class="header_area"> -->
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="image/Logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="index.html"><img src="" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -78,7 +78,7 @@ $get_category = $category->getSingleCategory($category_id);
             <div class="container">
                 <div class="section_title text-center">
                     <h2 class="title_w"><?php echo $get_category['category_name']; ?></h2>
-                    <p>For Campers</p>
+                    
                 </div>
                 <div class="row mb_30">
                     <?php

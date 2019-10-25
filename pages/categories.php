@@ -31,7 +31,7 @@ $category = new Category;
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="image/Logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="index.html"><img src="rentout_logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -94,15 +94,18 @@ $category = new Category;
                     $result = $category->getCategories();
 
                     foreach($result as $key=> $row){
+                        $category_id = $row['category_id'];
+                        $image = $row['category_picture'];
                 ?>
                     <div class="col-lg-4 col-sm-6">
                         <div class="aretal_item text-center">
-                            <div class="hotel_img">
-                                <img src="image/room1.jpg" alt="">
+                            <div class="category_img">
+                                <img src="../upload/<?php echo $row['category_picture']; ?>" alt="" class="img-fluid">
                                 <a href="itemCategories.php?category_id=<?php echo $row['category_id']; ?>"><div class="btn theme_btn button_hover">More</a></div>
                             </div>
                             <a href="#"><h4 class="sec_h4"><?php echo $row['category_name']; ?></h4></a>
-                            <h5>$130~<small>/day</small></h5>
+                           
+                        
                         </div>
                     </div>
                 <?php
